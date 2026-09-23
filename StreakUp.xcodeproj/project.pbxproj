@@ -32,6 +32,9 @@
 		A82DE01B3061981000F0A121 /* StatisticsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsResponse.swift; sourceTree = "<group>"; };
 		A82DE01D3061991000F0A121 /* LeaderboardEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardEntry.swift; sourceTree = "<group>"; };
 		A82DE01F306199A100F0A121 /* ApiError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiError.swift; sourceTree = "<group>"; };
+		A82DE0233061A27100F0A121 /* APIEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEndpoint.swift; sourceTree = "<group>"; };
+		A82DE0243061A83D00F0A121 /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
+		A82DE0253061C40500F0A121 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		A8539DAC3056C6F900FDCDC1 /* StreakUp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StreakUp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8539DB93056C6FB00FDCDC1 /* StreakUpTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StreakUpTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8539DC33056C6FB00FDCDC1 /* StreakUpUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StreakUpUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -116,6 +119,7 @@
 		A82DE02030619B1100F0A121 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				A82DE0243061A83D00F0A121 /* KeychainService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -191,6 +195,8 @@
 		A8539DD93056C74B00FDCDC1 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				A82DE0253061C40500F0A121 /* APIClient.swift */,
+				A82DE0233061A27100F0A121 /* APIEndpoint.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
