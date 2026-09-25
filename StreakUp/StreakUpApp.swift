@@ -9,7 +9,12 @@ import SwiftUI
 
 @main
 struct StreakUpApp: App {
-    @StateObject private var authViewModel = AuthViewModel()
+    @StateObject private var authViewModel: AuthViewModel
+    
+    init() {
+        let authService = AuthService()
+        _authViewModel = StateObject(wrappedValue: AuthViewModel(authService: authService))
+    }
     
     var body: some Scene {
         WindowGroup {

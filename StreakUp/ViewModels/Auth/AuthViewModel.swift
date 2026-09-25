@@ -12,13 +12,20 @@ import Foundation
 final class AuthViewModel: ObservableObject {
     
     @Published private(set) var currentUser: User?
-    @Published private(set) var isAuthenticated: Bool = false
-    @Published private(set) var authToken: String?
+    @Published private(set) var isAuthenticated = false
+    @Published private(set) var isLoading = false
+    @Published var errorMessage: String?
+    
+    private let authService: AuthServicing
+    
+    init(authService: AuthServicing) {
+        self.authService = authService
+    }
     
     // MARK: - Session bootstrap
     
     func restoreSession() async {
-        guard KeychainService.shared.getToken() != nil else {
+        guard authService.hasStoredToken() else {
             currentUser = nil
             isAuthenticated = false
             return
@@ -35,9 +42,8 @@ final class AuthViewModel: ObservableObject {
         defer { isLoading = false }
         
         do {
-            let response: AuthResponse = try await APIClient.shared.request(endpoint: .login(email: email, password: password), responseType: AuthResponse.self)
-            try KeychainService.shared.saveToken(response.token)
-            currentUser = response.user
+            let user = try await authService.login(email: email, password: password)
+            currentUser = user
             isAuthenticated = true
         } catch {
             handle(error)
@@ -52,10 +58,7 @@ final class AuthViewModel: ObservableObject {
         defer { isLoading = false }
         
         do {
-            let _: User = try await APIClient.shared.request(endpoint: .register(username: username, email: email, password: password),
-                                                             responseType: User.self)
-            // Registration succeded.
-            // In the UI later, this can trigger navigation back to login.
+            try await authService.register(username: username, email: email, password: password)
         } catch {
             handle(error)
         }
@@ -69,12 +72,11 @@ final class AuthViewModel: ObservableObject {
         defer { isLoading = false }
         
         do {
-            let user: User = try await APIClient.shared.request(endpoint: .getMe(), responseType: User.self)
+            let user = try await authService.fetchCurrentUser()
             currentUser = user
             isAuthenticated = true
         } catch {
-            try?
-            KeychainService.shared.deleteToken()
+            try? authService.logout()
             currentUser = nil
             isAuthenticated = false
             handle(error)
@@ -85,7 +87,7 @@ final class AuthViewModel: ObservableObject {
     
     func logout() {
         do {
-            try KeychainService.shared.deleteToken()
+            try authService.logout()
         } catch {
             errorMessage = error.localizedDescription
         }
@@ -94,11 +96,11 @@ final class AuthViewModel: ObservableObject {
         isAuthenticated = false
     }
     
-    // MARK: - Helpers
-    
     func clearError() {
         errorMessage = nil
     }
+    
+    // MARK: - Helpers
     
     private func handle(_ error: Error) {
         if let networkError = error as? LocalizedError,
@@ -109,4 +111,3 @@ final class AuthViewModel: ObservableObject {
         }
     }
 }
-    

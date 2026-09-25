@@ -24,27 +24,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		A82DE015306193DF00F0A121 /* LoginRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRequest.swift; sourceTree = "<group>"; };
-		A82DE0163061942500F0A121 /* UserRegistrationRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRegistrationRequest.swift; sourceTree = "<group>"; };
-		A82DE0173061948F00F0A121 /* AuthResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthResponse.swift; sourceTree = "<group>"; };
-		A82DE018306195BD00F0A121 /* ActivityRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityRequest.swift; sourceTree = "<group>"; };
-		A82DE0193061973100F0A121 /* FriendshipResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendshipResponse.swift; sourceTree = "<group>"; };
-		A82DE01B3061981000F0A121 /* StatisticsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsResponse.swift; sourceTree = "<group>"; };
-		A82DE01D3061991000F0A121 /* LeaderboardEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardEntry.swift; sourceTree = "<group>"; };
-		A82DE01F306199A100F0A121 /* ApiError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiError.swift; sourceTree = "<group>"; };
-		A82DE0233061A27100F0A121 /* APIEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEndpoint.swift; sourceTree = "<group>"; };
-		A82DE0243061A83D00F0A121 /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
-		A82DE0253061C40500F0A121 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		A8539DAC3056C6F900FDCDC1 /* StreakUp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StreakUp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8539DB93056C6FB00FDCDC1 /* StreakUpTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StreakUpTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8539DC33056C6FB00FDCDC1 /* StreakUpUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StreakUpUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		A8539DDA3056C9A600FDCDC1 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		A8539DDE305707D300FDCDC1 /* Activity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
-		A8539DDF305707E000FDCDC1 /* ActivityType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityType.swift; sourceTree = "<group>"; };
-		A8539DE03057080A00FDCDC1 /* FriendRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendRequest.swift; sourceTree = "<group>"; };
-		A8539DE13057081500FDCDC1 /* FriendshipStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendshipStatus.swift; sourceTree = "<group>"; };
-		A8539DE23057107600FDCDC1 /* Friend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
-		A89C8C013065433D001CBD00 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -90,64 +72,9 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		A82DE014306193D600F0A121 /* Auth */ = {
-			isa = PBXGroup;
-			children = (
-				A82DE0173061948F00F0A121 /* AuthResponse.swift */,
-				A82DE0163061942500F0A121 /* UserRegistrationRequest.swift */,
-				A82DE015306193DF00F0A121 /* LoginRequest.swift */,
-			);
-			path = Auth;
-			sourceTree = "<group>";
-		};
-		A82DE01A3061980300F0A121 /* Statistics */ = {
-			isa = PBXGroup;
-			children = (
-				A82DE01D3061991000F0A121 /* LeaderboardEntry.swift */,
-				A82DE01B3061981000F0A121 /* StatisticsResponse.swift */,
-			);
-			path = Statistics;
-			sourceTree = "<group>";
-		};
-		A82DE01E3061999900F0A121 /* Shared */ = {
-			isa = PBXGroup;
-			children = (
-				A82DE01F306199A100F0A121 /* ApiError.swift */,
-			);
-			path = Shared;
-			sourceTree = "<group>";
-		};
-		A82DE02030619B1100F0A121 /* Services */ = {
-			isa = PBXGroup;
-			children = (
-				A82DE0243061A83D00F0A121 /* KeychainService.swift */,
-			);
-			path = Services;
-			sourceTree = "<group>";
-		};
-		A82DE02130619B1D00F0A121 /* Auth */ = {
-			isa = PBXGroup;
-			children = (
-				A89C8C013065433D001CBD00 /* AuthViewModel.swift */,
-			);
-			path = Auth;
-			sourceTree = "<group>";
-		};
-		A82DE02230619B2600F0A121 /* Auth */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Auth;
-			sourceTree = "<group>";
-		};
 		A8539DA33056C6F900FDCDC1 = {
 			isa = PBXGroup;
 			children = (
-				A82DE02030619B1100F0A121 /* Services */,
-				A8539DD93056C74B00FDCDC1 /* Networking */,
-				A8539DD83056C74000FDCDC1 /* Views */,
-				A8539DD73056C73600FDCDC1 /* ViewModels */,
-				A8539DD63056C72D00FDCDC1 /* Models */,
 				A8539DAE3056C6F900FDCDC1 /* StreakUp */,
 				A8539DBC3056C6FB00FDCDC1 /* StreakUpTests */,
 				A8539DC63056C6FB00FDCDC1 /* StreakUpUITests */,
@@ -163,73 +90,6 @@
 				A8539DC33056C6FB00FDCDC1 /* StreakUpUITests.xctest */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		A8539DD63056C72D00FDCDC1 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				A82DE01E3061999900F0A121 /* Shared */,
-				A82DE01A3061980300F0A121 /* Statistics */,
-				A82DE014306193D600F0A121 /* Auth */,
-				A8539DDD305707C300FDCDC1 /* Friendship */,
-				A8539DDC305707B000FDCDC1 /* Activity */,
-				A8539DDB3057079100FDCDC1 /* User */,
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		A8539DD73056C73600FDCDC1 /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-				A82DE02130619B1D00F0A121 /* Auth */,
-			);
-			path = ViewModels;
-			sourceTree = "<group>";
-		};
-		A8539DD83056C74000FDCDC1 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				A82DE02230619B2600F0A121 /* Auth */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		A8539DD93056C74B00FDCDC1 /* Networking */ = {
-			isa = PBXGroup;
-			children = (
-				A82DE0253061C40500F0A121 /* APIClient.swift */,
-				A82DE0233061A27100F0A121 /* APIEndpoint.swift */,
-			);
-			path = Networking;
-			sourceTree = "<group>";
-		};
-		A8539DDB3057079100FDCDC1 /* User */ = {
-			isa = PBXGroup;
-			children = (
-				A8539DDA3056C9A600FDCDC1 /* User.swift */,
-			);
-			path = User;
-			sourceTree = "<group>";
-		};
-		A8539DDC305707B000FDCDC1 /* Activity */ = {
-			isa = PBXGroup;
-			children = (
-				A82DE018306195BD00F0A121 /* ActivityRequest.swift */,
-				A8539DDF305707E000FDCDC1 /* ActivityType.swift */,
-				A8539DDE305707D300FDCDC1 /* Activity.swift */,
-			);
-			path = Activity;
-			sourceTree = "<group>";
-		};
-		A8539DDD305707C300FDCDC1 /* Friendship */ = {
-			isa = PBXGroup;
-			children = (
-				A82DE0193061973100F0A121 /* FriendshipResponse.swift */,
-				A8539DE23057107600FDCDC1 /* Friend.swift */,
-				A8539DE13057081500FDCDC1 /* FriendshipStatus.swift */,
-				A8539DE03057080A00FDCDC1 /* FriendRequest.swift */,
-			);
-			path = Friendship;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
