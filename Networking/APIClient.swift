@@ -7,7 +7,7 @@
 
 import Foundation
 
-class APIClient {
+final class APIClient {
     
     static let shared = APIClient()
     
@@ -20,55 +20,71 @@ class APIClient {
     init() {
         // Configure decoder to handle ISO 8601 dates
         decoder.dateDecodingStrategy = .iso8601
+        encoder.dateEncodingStrategy = .iso8601
     }
     
     // MARK: - Generic request method
     func request<T: Codable>(endpoint: APIEndpoint, responseType: T.Type) async throws -> T {
-        var urlRequest = URLRequest(url: endpoint.url)
-        urlRequest.httpMethod = endpoint.method
-        
-        // Add JWT token if it exists
-        if let token = KeychainService.shared.getToken() {
-            urlRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-        }
-        
-        // Set content type
-        urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        urlRequest.setValue("application/json", forHTTPHeaderField: "Accept")
-        
-        // Add request body for POST/PUT
-        if endpoint.method != "GET" && endpoint.method != "DELETE" {
-            urlRequest.httpBody = try encodeRequestBody(for: endpoint)
-        }
-        
-        // Make the request
-        let (data, response) = try await session.data(for: urlRequest)
-        
-        // Check for HTTP errors
-        guard let httpResponse = response as? HTTPURLResponse else {
-            throw NetworkError.invalidResponse
-        }
-        
-        // Handle non-200 status codes
+        let (data, httpResponse) = try await performRequest(endpoint: endpoint)
+
         guard (200...299).contains(httpResponse.statusCode) else {
-            // Try to decode the error response
-            if let apiError = try? decoder.decode(ApiError.self, from: data) {
-                throw NetworkError.serverError(apiError)
-            } else {
-                throw NetworkError.httpError(httpResponse.statusCode)
-            }
+            throw try decodeServerError(from: data, fallbackStatusCode: httpResponse.statusCode)
         }
-        
-        // Decode the response
-        do{
-            return try decoder.decode(T.self, from: data)
+
+        guard !data.isEmpty else {
+            throw NetworkError.emptyResponse
+        }
+
+        do {
+            return try decoder.decode(responseType, from: data)
         } catch {
             throw NetworkError.decodingError(error)
         }
     }
+
+    // MARK: - Void request method
+    func requestVoid(endpoint: APIEndpoint) async throws {
+        let (data, httpResponse) = try await performRequest(endpoint: endpoint)
+
+        guard (200...299).contains(httpResponse.statusCode) else {
+            throw try decodeServerError(from: data, fallbackStatusCode: httpResponse.statusCode)
+        }
+    }
     
+    // MARK: - Request builder
+    private func performRequest(endpoint: APIEndpoint) async throws -> (Data, HTTPURLResponse) {
+        var urlRequest = URLRequest(url: endpoint.url)
+        urlRequest.httpMethod = endpoint.method
+
+        if let token = KeychainService.shared.getToken() {
+            urlRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        }
+
+        urlRequest.setValue("application/json", forHTTPHeaderField: "Accept")
+
+        if let body = try encodeRequestBody(for: endpoint) {
+            urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            urlRequest.httpBody = body
+        }
+
+        let (data, response) = try await session.data(for: urlRequest)
+
+        guard let httpResponse = response as? HTTPURLResponse else {
+            throw NetworkError.invalidResponse
+        }
+
+        return (data, httpResponse)
+    }
+
+    private func decodeServerError(from data: Data, fallbackStatusCode: Int) throws -> NetworkError {
+        if let apiError = try? decoder.decode(ApiError.self, from: data) {
+            return .serverError(apiError)
+        }
+        return .httpError(fallbackStatusCode)
+    }
+
     // MARK: - Helper: encode request body
-    private func encodeRequestBody(for endpoint: APIEndpoint) throws -> Data {
+    private func encodeRequestBody(for endpoint: APIEndpoint) throws -> Data? {
         switch endpoint {
         case .login(let email, let password):
             let request = LoginRequest(email: email, password: password)
@@ -91,7 +107,7 @@ class APIClient {
             return try encoder.encode(request)
         
         default:
-            return Data()
+            return nil
         }
     }
 }
@@ -102,6 +118,7 @@ enum NetworkError: LocalizedError {
     case httpError(Int)
     case serverError(ApiError)
     case decodingError(Error)
+    case emptyResponse
     case keychainError(KeychainError)
     
     var errorDescription: String? {
@@ -114,6 +131,8 @@ enum NetworkError: LocalizedError {
             return apiError.message
         case .decodingError(let error):
             return "Failed to decode response: \(error.localizedDescription)"
+        case .emptyResponse:
+            return "The server returned no data."
         case .keychainError(let error):
             return error.localizedDescription
         }

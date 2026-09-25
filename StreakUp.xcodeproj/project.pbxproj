@@ -44,6 +44,7 @@
 		A8539DE03057080A00FDCDC1 /* FriendRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendRequest.swift; sourceTree = "<group>"; };
 		A8539DE13057081500FDCDC1 /* FriendshipStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendshipStatus.swift; sourceTree = "<group>"; };
 		A8539DE23057107600FDCDC1 /* Friend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
+		A89C8C013065433D001CBD00 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -127,6 +128,7 @@
 		A82DE02130619B1D00F0A121 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
+				A89C8C013065433D001CBD00 /* AuthViewModel.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";

@@ -41,9 +41,19 @@ extension APIEndpoint {
     var baseURL: URL {
         URL(string: "http://localhost:8080")!
     }
+
+    var queryItems: [URLQueryItem]? {
+        switch self {
+        case .searchUsers(let query), .searchFriends(let query):
+            return [URLQueryItem(name: "q", value: query)]
+        default:
+            return nil
+        }
+    }
+
     var path: String {
         switch self {
-            //Auth
+            // Auth
         case .login:
             return "/api/auth/login"
         case .register:
@@ -103,6 +113,9 @@ extension APIEndpoint {
     }
     
     var url: URL {
-        baseURL.appendingPathComponent(path)
+        var components = URLComponents(url: baseURL, resolvingAgainstBaseURL: false)!
+        components.path = path
+        components.queryItems = queryItems
+        return components.url!
     }
 }

@@ -11,6 +11,6 @@ struct ActivityRequest: Codable {
     let type: ActivityType
     let date: String
     let durationMinutes: Int
-    let distance: Double?
+    let distanceKm: Double?
     let notes: String?
 }
