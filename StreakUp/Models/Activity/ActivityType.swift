@@ -8,7 +8,6 @@
 import Foundation
 
 enum ActivityType: String, Codable, CaseIterable {
-    case running = "RUNNING"
     case walking = "WALKING"
     case running = "RUNNING"
     case cycling = "CYCLING"
